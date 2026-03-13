@@ -1,15 +1,33 @@
 #!/data/data/com.termux/files/usr/bin/bash
-HOPE_DIR="$HOME/hope-ai"
-PYTHON="$HOME/.pyenv/versions/3.13.0/bin/python"
-[ ! -f "$PYTHON" ] && PYTHON="python3"
+
+HOPE="$HOME/hope-ai"
 
 case "$1" in
-    start) cd "$HOPE_DIR" && $PYTHON core/kernel.py ;;
-    ai) shift; cd "$HOPE_DIR" && $PYTHON -c "import sys; sys.path.insert(0, '.'); from ai_orchestrator.router import route; print(route('$*', 'general'))" ;;
-    tool) echo "Tools: web_search, file_ops" ;;
-    skill) echo "Skills: (learning system active)" ;;
-    sync) cd "$HOPE_DIR" && git add . && git commit -m "sync" && git push ;;
-    status) echo "HOPE v7.0 Ready" ;;
-    test) echo "All systems operational" ;;
-    *) echo "Usage: hope [start|ai|tool|skill|sync|status|test]" ;;
+
+start)
+cd $HOPE
+python core/kernel.py
+;;
+
+ai)
+shift
+cd $HOPE
+python -c "import sys;sys.path.insert(0,'.');from ai_orchestrator.router import route;print(route('$*'))"
+;;
+
+status)
+echo "HOPE OK"
+;;
+
+sync)
+cd $HOPE
+git add .
+git commit -m "sync"
+git push
+;;
+
+*)
+echo "hope [start|ai|status|sync]"
+;;
+
 esac
