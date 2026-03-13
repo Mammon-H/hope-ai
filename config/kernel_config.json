@@ -1,0 +1,5 @@
+{
+  "auto_sync_github": true,
+  "default_ai_backend": "openai",
+  "log_level": "INFO"
+}
